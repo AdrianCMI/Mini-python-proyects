@@ -1,4 +1,5 @@
 import random
+from os import system
 
 #variables
 list_palabras = "adrian novia sombra animal oveja aprender ejercicios caballo perro vaca computadora python abeja diente conejo mantel mesa basura escritorio ubuntu gorro parque amuleto cama cuarto descargar curso diario vaso cuadro foto revista esdrujula parlantes radio tutorial platano naranja manzana movil casco ventana silla juegos television nevera modulos cocina timbre lavadora estufa enchufe futbol pelota pizarra cargador factura papel impresora telefono remedio planta vegetal aves luna electricidad copa tiempo google lenguaje internet esposa jarra microondas manual sarten cortina musica pato esternocleidomastoirdeo".split()
@@ -8,6 +9,7 @@ palabra_secreta_l = list(letras * "_")
 palabra_secreta = ""
 posiciones = []
 moñigote = 0
+usadas = []
 
 #moñigote
 def muñeco(moñigote):
@@ -96,15 +98,20 @@ def muñeco(moñigote):
 #palabra_secreta
 while "_" in palabra_secreta_l and moñigote < 8:
     letra = input("")
+    system("clear")
     for pos,char in enumerate(palabra_random):
         if char == letra:
             del palabra_secreta_l[pos]
             palabra_secreta_l.insert(pos,letra)
     if not letra in palabra_random:
         moñigote  += 1
+    if letra not in usadas:
+        usadas.append(letra)
     palabra_secreta = "".join(palabra_secreta_l)
     print(palabra_secreta)
     muñeco(moñigote)
+    print(usadas)
+    
 if not "_" in palabra_secreta_l:
     print("Has ganadooo!!!!")
 elif moñigote >= 8:
